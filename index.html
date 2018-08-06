@@ -8,24 +8,26 @@
 </head>
 <body>
   <div id="app">
-    <div>
-      <h1>{{ title | capitalize }}</h1>
-      <h2>{{ subtitle | lowercase }}</h2>
-    </div>
+    <!-- <button v-on:click="add">Add 1</button> -->
+    <button @click="add">Add 1</button>
+    <button @click="substract">Subtract 1</button>
+    counter: {{ counter }}
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script type="text/javascript">
     let app = new Vue({
       el: '#app',
       data: {
-        title: 'Estás en platzi',
-        subtitle: 'Estás viendo el curso de vue.js',
+        counter: 0,
       },
-      filters: {
-        uppercase: (str) => str.toUpperCase(),
-        lowercase: (str) => str.toLowerCase(),
-        capitalize: (str) => str.charAt(0).toUpperCase() + str.slice(1),
-      },
+      methods: {
+        add: function () {
+          return this.counter++;
+        },
+        substract: function () {
+          return this.counter--;
+        },
+      }
     });
   </script>
 </body>
