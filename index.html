@@ -8,11 +8,15 @@
 </head>
 <body>
   <div id="app">
-    <template v-if="show">
+    <!--  v-show cannot use with a template display:none style-->
+    <div v-show="show">
       <h1>This is my title</h1>
       <h2>This is my subtitle</h2>
       <a :href="url" target="_blank">Ir a {{ page }}</a>
-    </template>
+    </div>
+    <div v-show="!show">
+      Esto está oculto
+    </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script type="text/javascript">
