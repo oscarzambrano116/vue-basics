@@ -11,14 +11,27 @@
     <form @submit.prevent="submit" action="" method="post">
       <h2>What are your favorites courses?</h2>
       <template v-for="course in courses">
-        <input v-model="selectedCourses" type="checkbox" :id="course.value" :value="course.value">
-        <label :for="course.value">{{course.name}}</label>
+        <course :course="course" :selected-courses="selectedCourses" @checked="selectCourse"></course>
       </template>
       <button type="submit">Enviar</button>
     </form>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script type="text/javascript">
+    Vue.component('course', {
+      props: ['course'],
+      methods: {
+        onChange: function (event) {
+          this.$emit('checked', this.course.value, event.target.checked)
+        },
+      },
+      template: `
+        <div>
+          <input type="checkbox" :id="course.value" :value="course.value" @change="onChange">
+          <label :for="course.value">{{course.name}}</label>
+        </div>
+      `,
+    });
     let app = new Vue({
       el: '#app',
       data: {
@@ -46,6 +59,14 @@
         submit: function() {
           console.log('Submit!');
           console.log(this.selectedCourses);
+        },
+        selectCourse: function (course, checked) {
+          if (checked) {
+            this.selectedCourses.push(course);
+          } else {
+            const index = this.selectedCourses.indexOf(course);
+            this.selectedCourses.splice(index, 1);
+          }
         },
       }
     });
