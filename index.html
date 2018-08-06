@@ -8,14 +8,9 @@
 </head>
 <body>
   <div id="app">
-    <!--  v-show cannot use with a template display:none style-->
-    <div v-show="show">
-      <h1>This is my title</h1>
-      <h2>This is my subtitle</h2>
-      <a :href="url" target="_blank">Ir a {{ page }}</a>
-    </div>
-    <div v-show="!show">
-      Esto está oculto
+    <div>
+      <h1>{{ title | capitalize }}</h1>
+      <h2>{{ subtitle | lowercase }}</h2>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -23,9 +18,13 @@
     let app = new Vue({
       el: '#app',
       data: {
-        url: 'https://www.google.com',
-        page: 'Google',
-        show: true,
+        title: 'Estás en platzi',
+        subtitle: 'Estás viendo el curso de vue.js',
+      },
+      filters: {
+        uppercase: (str) => str.toUpperCase(),
+        lowercase: (str) => str.toLowerCase(),
+        capitalize: (str) => str.charAt(0).toUpperCase() + str.slice(1),
       },
     });
   </script>
