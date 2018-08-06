@@ -8,17 +8,40 @@
 </head>
 <body>
   <div id="app">
-    <button @click="counter++">Add 1</button>
-    <button @click="counter--">Subtract 1</button>
-    counter: {{ counter }}
+    <input type="text" name="name" placeholder="Enter your name" v-model="name">
+    <p>Tu nombre en mayúscula es: {{ name | uppercase }}</p>
+    <form @submit.prevent="submit" action="" method="post">
+      <h2>What are your favorites courses?</h2>
+      <input v-model="courses" type="checkbox" id="vue" value="vue">
+      <label for="vue">Curso de Vue.js</label>
+      <input v-model="courses" type="checkbox" id="seo" value="seo">
+      <label for="seo">Curso de SEO</label>
+      <input v-model="courses" type="checkbox" id="react" value="react">
+      <label for="react">Curso de React y redux</label>
+      <input v-model="courses" type="checkbox" id="growth" value="growth">
+      <label for="growth">Curso de Growth Marketing</label>
+      <button type="submit">Enviar</button>
+    </form>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script type="text/javascript">
     let app = new Vue({
       el: '#app',
       data: {
-        counter: 0,
+        name: '',
+        courses: [],
       },
+      filters: {
+        uppercase: function (str) {
+          return str.toUpperCase();
+        },
+      },
+      methods: {
+        submit: function() {
+          console.log('Submit!');
+          console.log(this.courses);
+        },
+      }
     });
   </script>
 </body>
