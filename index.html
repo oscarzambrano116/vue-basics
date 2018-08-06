@@ -8,18 +8,20 @@
 </head>
 <body>
   <div id="app">
-    Hola {{ name }}
-    <!-- <a v-bind:href="url" target="_blank">Ir a {{ page }}</a>     -->
-    <a :href="url" target="_blank">Ir a {{ page }}</a>
+    <template v-if="show">
+      <h1>This is my title</h1>
+      <h2>This is my subtitle</h2>
+      <a :href="url" target="_blank">Ir a {{ page }}</a>
+    </template>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script type="text/javascript">
     let app = new Vue({
       el: '#app',
       data: {
-        name: 'Mundo!',
-        page: 'google',
         url: 'https://www.google.com',
+        page: 'Google',
+        show: true,
       },
     });
   </script>
